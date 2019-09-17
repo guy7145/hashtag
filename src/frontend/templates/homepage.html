@@ -38,14 +38,16 @@ URI     : https://colorlib.com
     <!-- Nav Menu -->
 
     <div style="position: fixed; background-color: #0c3c60; width: 100%;">
-        <div>
+        <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <nav class="navbar navbar-dark navbar-expand-lg">
                         <div>
-                            <a href="/" align="left">
-                                <img src="{{ url_for('static', filename='images/logo.png') }}" style="width:200px;height:70px; margin-left: auto">
+
+                            <a href="\">
+                                <img src="{{ url_for('static', filename='images/logo.png') }}" style="width:200px;height:70px;">
                             </a>
+
                         </div>
                     </nav>
                 </div>
@@ -56,35 +58,21 @@ URI     : https://colorlib.com
 
 
 
-    <header style="background-image:url({{ url_for('static', filename='images/banner.png') }}); background-size: cover; background-repeat: no-repeat" id="home">
+    <header style="background-image:url({{ url_for('static', filename='images/banner.png') }}); background-size: 105%; background-repeat: no-repeat" id="home">
         <div class="img-holder mt-3">
             <br/>
-            <img src="/image/{{ fid }}" alt="picutre" class="img-fluid" style="border-radius: 8px;">
             <br/>
-            <br/>
-            <form action="/oracle" method="get">
-                <input type="hidden" name="id" value="{{ fid }}">
-                <input type="text" name="tag" value="{{ hint }}" autofocus>
-            </form>
             <br/><br/>
-            <div>accuracy: {{ accuracy }}</div>
             <div class="container mt-1">
 
             </div>
         </div>
     </header>
     <!-- // end .section -->
-    <footer align="center">
+    <footer class="my-5 text-center">
+        <!-- Copyright removal is not prohibited! -->
         <p class="mb-2"><small>HACKATON KAMANIM 2019</small></p>
     </footer>
-
-    <!-- jQuery and Bootstrap -->
-    <script src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
-    <!-- Plugins JS -->
-    <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
-    <!-- Custom JS -->
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </body>
 </html>

@@ -90,4 +90,4 @@ class Session:
         return elements[np.argmax(counts)]
 
     def estimate_accuracy(self):
-        return accuracy(Committee.majority(self.committee.vote(self.ds.X_test)), self.ds.y_test)
+        return str(round(accuracy(Committee.majority(self.committee.vote(self.ds.X_test)), self.ds.y_test) * 100, 2)) + '%'
