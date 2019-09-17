@@ -57,14 +57,36 @@ URI     : https://colorlib.com
 
 
     <header style="background-image:url({{ url_for('static', filename='images/banner.png') }}); background-size: cover; background-repeat: no-repeat" id="home">
+        <style>
+            .tagged
+            {
+                border-style: solid;
+                border-width: 6px;
+                border-radius: 16px;
+                border-color: rgba(255, 255, 255, 0.4);
+                z-index: 1;
+            }
+            .loading
+            {
+                position:absolute;
+                z-index: 9999;
+            }
+            .focus-area {
+
+            }
+      </style>
         <div class="img-holder mt-3">
             <br/>
-            <img src="/image/{{ fid }}" alt="picutre" class="img-fluid" style="border-radius: 8px;">
+            <div id="carousel-div">
+                <img src="/image/{{ fid }}" alt="picutre" class="img-fluid tagged">
+                <img src="{{ url_for('static', filename='images/Ripple-1s-200px.svg') }}" alt="loading" class="loading">
+            </div>
             <br/>
             <br/>
             <form action="/oracle" method="get">
                 <input type="hidden" name="id" value="{{ fid }}">
                 <input type="text" name="tag" value="{{ hint }}" autofocus>
+                <input type="submit" name="submit-button" value="Submit">
             </form>
             <br/><br/>
             <div>accuracy: {{ accuracy }}</div>

@@ -74,6 +74,9 @@ class Session:
 
     def take_label(self, sample_id, label):
         label = int(label)
+        if label not in self.ds.all_labels:
+            raise RuntimeError(f"illegal label {label}")
+
         X, y = self.oracle.query_update(np.array([sample_id]))
 
         if label != y[0]:
