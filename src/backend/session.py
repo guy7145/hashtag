@@ -26,7 +26,7 @@ class Session:
             data = data / 256
             conf = Configuration(
                 test_size=1000,
-                seed_size=24,
+                seed_size=26,
                 target_committee_size=3,
                 training_method='bagging',
                 query_measure_points=[],  # dummy
