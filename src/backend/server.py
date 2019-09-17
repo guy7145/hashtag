@@ -11,7 +11,7 @@ NO_LABEL = 'no_label'
 NO_ID = -1
 MNIST = 'mnist'
 SIGN = 'sign-mnist'
-dataset = SIGN
+dataset = MNIST
 
 app = Flask(__name__, static_url_path='/static')
 os.makedirs(app.static_folder, exist_ok=True)
