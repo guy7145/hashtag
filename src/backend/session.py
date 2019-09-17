@@ -1,16 +1,15 @@
+import numpy as np
 from PIL import Image
-from sklearn.datasets import load_digits
 from sklearn.linear_model import LogisticRegression
 
 from backend.active_learning.committee_utils.committee import Committee
-from backend.active_learning.experimentation.exporters.implementations import Accuracy, accuracy
+from backend.active_learning.experimentation.exporters.implementations import accuracy
 from src.backend.active_learning.active_learning.vote_entropy import VoteEntropy
 from src.backend.active_learning.experimentation.configuration.configuration import Configuration
 from src.backend.active_learning.experimentation.dataset.dataset import DataSet
 from src.backend.active_learning.experimentation.dataset.loader import Loader
 from src.backend.active_learning.experimentation.experiments.experiment import Experiment
 from src.backend.active_learning.experimentation.oracle import Oracle
-import numpy as np
 
 
 def show_mnist_image(image):
@@ -21,17 +20,36 @@ def show_mnist_image(image):
 class Session:
     def __init__(self, dataset_name):
         data, target = Loader.load_dataset(dataset_name)
-        conf = Configuration(
-            test_size=300,
-            seed_size=10,
-            target_committee_size=3,
-            training_method='bagging',
-            query_measure_points=[],    # dummy
-            datasets=[],                # dummy
-            nb_repeats=0,               # dummy
-            base_estimator=LogisticRegression(multi_class='auto', solver='liblinear'),
-            seed_stratified=True
-        )
+        conf = None
+
+        if dataset_name == 'sign-mnist':
+            data = data / 256
+            conf = Configuration(
+                test_size=1000,
+                seed_size=24,
+                target_committee_size=3,
+                training_method='bagging',
+                query_measure_points=[],  # dummy
+                datasets=[],  # dummy
+                nb_repeats=0,  # dummy
+                base_estimator=LogisticRegression(multi_class='auto', solver='liblinear'),
+                seed_stratified=True
+            )
+
+        elif dataset_name == 'mnist':
+            data = data / 16
+            conf = Configuration(
+                test_size=300,
+                seed_size=10,
+                target_committee_size=3,
+                training_method='bagging',
+                query_measure_points=[],  # dummy
+                datasets=[],  # dummy
+                nb_repeats=0,  # dummy
+                base_estimator=LogisticRegression(multi_class='auto', solver='liblinear'),
+                seed_stratified=True
+            )
+
         self.ds = DataSet(data, target, conf)
         self.oracle = Oracle(self.ds.X_unlabeled, self.ds.y_oracle)
         self.strategy = VoteEntropy()

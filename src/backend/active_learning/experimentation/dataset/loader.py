@@ -8,7 +8,7 @@ from src.backend.active_learning.experimentation.dataset.errors import UnknownDa
 
 
 class Loader:
-    __DATASETS_DIR = os.path.join('datasets', 'UCI')
+    __DATASETS_DIR = os.path.join('static', 'datasets')
 
     @staticmethod
     def load_dataset(dataset_name: str):
@@ -52,6 +52,7 @@ class Loader:
             'heart': Loader.create_uci_loader('Heart Disease UCI', target_column='target'),
             'credit': Loader.create_uci_loader('Credit Card Fraud Detection', target_column='Class', drop=["Time"]),
             'yeast': Loader.create_uci_loader('yeast', target_column=9, drop=[0], header=None),
+            'sign-mnist': Loader.create_uci_loader('SignLanguage', target_column='label'),
         }
 
     @staticmethod
