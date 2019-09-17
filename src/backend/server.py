@@ -9,8 +9,10 @@ import string
 from src.backend.session import Session
 
 app = Flask(__name__, static_url_path='/static')
-session = Session('mnist')
-
+MNIST = 'mnist'
+SIGN = 'sign-mnist'
+dataset = SIGN
+session = Session(dataset)
 
 @app.route('/')
 def index():
@@ -20,7 +22,15 @@ def index():
 @app.route('/image/<fid>')
 def image(fid):
     fid = int(fid)
-    sample = session.oracle.X[fid].reshape(8, 8) * 16
+
+    sample = session.oracle.X[fid]
+
+    if dataset == MNIST:
+        sample = sample.reshape(8, 8) * 256
+
+    elif dataset == SIGN:
+        sample = sample.reshape(28, 28) * 256
+
     im = Image.fromarray(sample).resize((256, 256)).convert("L")
     name = 'tmp' + ''.join((random.choice(string.ascii_lowercase) for _ in range(10))) + '.jpg'
     im.save(os.path.join(app.static_folder, name))
