@@ -8,11 +8,13 @@ import string
 
 from src.backend.session import Session
 
+os.makedirs(app.static_folder, exist_ok=True)
 app = Flask(__name__, static_url_path='/static')
 MNIST = 'mnist'
 SIGN = 'sign-mnist'
 dataset = SIGN
 session = Session(dataset)
+
 
 @app.route('/')
 def index():
