@@ -10,7 +10,7 @@ URI     : https://colorlib.com
  -->
 
 <head>
-     <link rel="icon" href="{{ url_for('static', filename='images/icon.ico') }}">
+     <link rel="icon" href="{{ url_for('static', filename='images/icon2.ico') }}">
     <!-- link rel="icon" href=C:\Users\Michal\Desktop\Hackaton\hashtag-master\src\frontend\pics\icon.ico" -->
     <title>Hashtag</title>
     <!-- Required meta tags -->
@@ -31,6 +31,16 @@ URI     : https://colorlib.com
     <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
     <!-- Main css -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+            .tagged
+            {
+                border-style: solid;
+                border-width: 7px;
+                border-radius: 16px;
+                border-color: rgba(255, 255, 255, 0.4);
+            }
+      </style>
 </head>
 
 <body data-spy="scroll" data-target="#navbar" data-offset="30">
@@ -44,7 +54,7 @@ URI     : https://colorlib.com
                     <nav class="navbar navbar-dark navbar-expand-lg">
                         <div>
                             <a href="/" align="left">
-                                <img src="{{ url_for('static', filename='images/logo.png') }}" style="width:200px;height:70px; margin-left: auto">
+                                <img src="{{ url_for('static', filename='images/logo.png') }}" style="width:200px;height:70px;">
                             </a>
                         </div>
                     </nav>
@@ -55,45 +65,17 @@ URI     : https://colorlib.com
     </div>
 
 
-
-    <header style="background-image:url({{ url_for('static', filename='images/banner.png') }}); background-size: cover; background-repeat: no-repeat" id="home">
-        <style>
-            .tagged
-            {
-                border-style: solid;
-                border-width: 6px;
-                border-radius: 16px;
-                border-color: rgba(255, 255, 255, 0.4);
-                z-index: 1;
-            }
-            .loading
-            {
-                position:absolute;
-                margin-left: -256 px;
-                z-index: 9999;
-            }
-            .focus-area {
-
-            }
-      </style>
-        <div class="img-holder mt-3">
-            <br/>
-            <div id="carousel-div">
-                <img src="/image/{{ fid }}" alt="picutre" class="img-fluid tagged">
+    <br/><br/>
+    <header style="height: 570px; background-image:url({{ url_for('static', filename='images/banner.png') }}); background-size: cover; background-repeat: no-repeat" id="home">
+            <div style="height: 400px; background-color: rgba(9, 0, 40, 0.5); border-radius: 7%; width: 21%; margin: auto;" align="center">
+                <br/><img src="/image/{{ fid }}" alt="picutre" class="img-fluid tagged"  style="border-radius: 8px;"> <br/><br/>
+                <form action="/oracle" method="get">
+                    <input type="hidden" name="id" value="{{ fid }}">
+                    <input type="text" name="tag" style="text-align: center; width: 35px; border-radius: 15%" value="{{ hint }}" autofocus>
+                </form>
             </div>
-            <br/>
-            <br/>
-            <form action="/oracle" method="get">
-                <input type="hidden" name="id" value="{{ fid }}">
-                <input type="text" name="tag" value="{{ hint }}" autofocus>
-                <input type="submit" name="submit-button" value="Submit">
-            </form>
-            <br/><br/>
-            <div>accuracy: {{ accuracy }}</div>
-            <div class="container mt-1">
-
-            </div>
-        </div>
+        <div style="color: #ECECEC; font-family: Segoe UI Historic; font-size: 22pt;  text-shadow: 2px 2px 4px #000000; -webkit-text-stroke-width: 1px;
+   -webkit-text-stroke-color: #494949;">Accuracy: {{ accuracy }}</div>
     </header>
     <!-- // end .section -->
     <footer align="center">
